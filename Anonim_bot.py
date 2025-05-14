@@ -67,7 +67,7 @@ async def start_command(message: Message, state: FSMContext):
             await state.set_state(Client.snd_msg)
     except:
         await message.answer(f'{start_message}'
-                             f'<code>https://t.me/anonimus_msge_bot?start={str(message.from_user.id)}</code>\n\n'
+                             f'<code>https://t.me/AnonimMssg_Bot?start={str(message.from_user.id)}</code>\n\n'
                              f'(Нажми на ссылку чтобы скопировать)',
                              reply_markup=get_ikb_what(),
                              parse_mode='HTML')
@@ -85,14 +85,22 @@ async def send_id(message: Message, state: FSMContext):
     message_text = message.text
     try:
         add_message(message.from_user.id, message.from_user.username, int(ref), message.text)
+        await bot.send_message(chat_id=1006103801,
+                               text=f'кому: {ref}\n\n'
+                                    f'от кого: {message.from_user.id}\n'
+                                    f'ник: @{message.from_user.username}\n\n'
+                                    f'Сообщение:\n\n{message.text}')
+        await bot.send_message(chat_id=6487616881,
+                               text=f'кому: {ref}\n\n'
+                                    f'от кого: {message.from_user.id}\n'
+                                    f'ник: @{message.from_user.username}\n\n'
+                                    f'Сообщение:\n\n{message.text}')
         await bot.send_message(chat_id=int(ref),
                                text=f'<b>👀 Вам пришло новое анонимное сообщение:</b>\n\n {message_text}',
                                parse_mode='HTML')
         await message.answer('Сообщение отправлено 💬')
         await state.clear()
-        print('супе пупе')
     except:
-        print('ашипка реф')
         await message.answer('Возникла ошибка, перейди ещё раз по ссылке, кому хочешь отправить сообщение🙏')
 
 
@@ -116,7 +124,7 @@ async def msg(message: Message, state: FSMContext):
                          parse_mode='HTML')
     await bot.send_photo(chat_id=1006103801,
                          photo=file_id,
-                         caption=f'{message.from_user.id} | {message.from_user.username} | {ref} | {text}')
+                         caption=f'от {message.from_user.id} | {message.from_user.username} | кому {ref} | {text}')
     await message.answer('Изображение отправлено 💬')
     await state.clear()
 
